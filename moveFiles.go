@@ -13,8 +13,8 @@ func main() {
 	sourceDir := "F:\\dedicated\\SPTDedicated_v3.9.8\\user\\profiles"
 	destDir := "D:\\dedicated_backups\\savefiles\\spt_profiles"
 
-	// Get the current date to create a timestamped backup folder
-	dateStr := time.Now().Format("2006-01-02")
+	// Get the current date and time to create a timestamped backup folder
+	dateStr := time.Now().Format("2006-01-02_15-04-05")
 	backupFolder := fmt.Sprintf("%s\\backup_1_%s", destDir, dateStr)
 
 	// Create the backup folder if it doesn't exist
