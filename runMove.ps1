@@ -122,29 +122,29 @@ function Check-HandleExecutable {
     }
 }
 
-# Function to create a scheduled task that runs when SPT.Server.exe closes
-function Create-ScheduledTask {
-    $taskName = "MoveFilesTask"
-    $taskAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "F:\dedicated\SPTDedicated_v3.9.8\runMove.ps1" -Verb "RunAs"
+# # Function to create a scheduled task that runs when SPT.Server.exe closes
+# function Create-ScheduledTask {
+#     $taskName = "MoveFilesTask"
+#     $taskAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "F:\dedicated\SPTDedicated_v3.9.8\runMove.ps1" -Verb "RunAs"
 
-    # Define the WMI event filter to detect when SPT.Server.exe closes
-    $taskTrigger = New-ScheduledTaskTrigger -AtStartup
-    $eventFilter = New-Object -ComObject "Schedule.Service"
-    $eventFilter.Query = "SELECT * FROM __InstanceDeletionEvent WITHIN 1 WHERE TargetInstance ISA 'Win32_Process' AND TargetInstance.Name = 'SPT.Server.exe'"
+#     # Define the WMI event filter to detect when SPT.Server.exe closes
+#     $taskTrigger = New-ScheduledTaskTrigger -AtStartup
+#     $eventFilter = New-Object -ComObject "Schedule.Service"
+#     $eventFilter.Query = "SELECT * FROM __InstanceDeletionEvent WITHIN 1 WHERE TargetInstance ISA 'Win32_Process' AND TargetInstance.Name = 'SPT.Server.exe'"
 
-    # Create an EventTrigger based on the WMI event query
-    $taskTrigger.EventTrigger = $eventFilter
+#     # Create an EventTrigger based on the WMI event query
+#     $taskTrigger.EventTrigger = $eventFilter
 
-    try {
-        # Register the scheduled task with elevated privileges using the action and trigger defined
-        Register-ScheduledTask -Action $taskAction -Trigger $taskTrigger -TaskName $taskName -Description "Runs the move files script when SPT.Server.exe closes" -RunLevel Highest
-        Write-Log "Scheduled task '$taskName' created successfully."
-    } catch {
-        Write-Log "ERROR: Failed to create scheduled task. $_"
-        $_ | Out-File "scheduled_task_error_log.txt"
-        return  # Continue running other tasks
-    }
-}
+#     try {
+#         # Register the scheduled task with elevated privileges using the action and trigger defined
+#         Register-ScheduledTask -Action $taskAction -Trigger $taskTrigger -TaskName $taskName -Description "Runs the move files script when SPT.Server.exe closes" -RunLevel Highest
+#         Write-Log "Scheduled task '$taskName' created successfully."
+#     } catch {
+#         Write-Log "ERROR: Failed to create scheduled task. $_"
+#         $_ | Out-File "scheduled_task_error_log.txt"
+#         return  # Continue running other tasks
+#     }
+# }
 
 # Main function to orchestrate the entire process
 function Main {
@@ -158,7 +158,7 @@ function Main {
     Run-GoProgram
 
     # Step 4: Create the scheduled task
-    Create-ScheduledTask
+    # Create-ScheduledTask
 }
 
 # Call the main function
