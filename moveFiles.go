@@ -15,7 +15,7 @@ func main() {
 
 	// Get the current date and time to create a timestamped backup folder
 	dateStr := time.Now().Format("2006-01-02_15-04-05")
-	backupFolder := fmt.Sprintf("%s\\backup_1_%s", destDir, dateStr)
+	backupFolder := fmt.Sprintf("%s\\backup_%s", destDir, dateStr)
 
 	// Create the backup folder if it doesn't exist
 	if err := os.MkdirAll(backupFolder, 0755); err != nil {
