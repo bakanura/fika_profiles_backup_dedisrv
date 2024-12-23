@@ -38,12 +38,12 @@ function Install-AllPackages {
     Write-Log "Checking and installing necessary packages..."
 
     # Install necessary packages using winget
-    Install-Package "Microsoft.Sysinternals.Handle"  # Handle (for file locks)
-    Install-Package "GoLang.Go"  # Go (for Go program)
-    Install-Package "7zip.7zip"  # Optional: 7zip (for compression tasks)
-    Install-Package "Git.Git"  # Optional: Git (for version control)
-    Install-Package "Microsoft.PowerShell"  # Optional: PowerShell 7 (latest version)
-    Install-Package "Microsoft.VCRedist.2015+.x64"  # Optional: Visual C++ Redistributables
+    winget install --id=Microsoft.Sysinternals.Handle  -e # Handle (for file locks)
+    winget install --id=GoLang.Go  -e  # Go (for Go program)
+    winget install --id=7zip.7zip  -e  # Optional: 7zip (for compression tasks)
+    winget install --id=Git.Git  -e  # Optional: Git (for version control)
+    winget install --id=Microsoft.PowerShell  -e  # Optional: PowerShell 7 (latest version)
+    winget install --id=Microsoft.VCRedist.2015+.x64  -e  # Optional: Visual C++ Redistributables
 
     Write-Log "Package installation completed."
 }
